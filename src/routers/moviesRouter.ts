@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { getMovies, postMovie } from "../controllers/moviesController";
+import { deleteMovie, getMovies, postMovie, updateWatchedMovie } from "../controllers/moviesController.js";
+import { moviesValidate } from "../middlewares/moviesValidate.js";
+
 
 const router = Router();
 
-router.get("/movies/:plataform?/:genre?",getMovies);
-router.post("/movies",postMovie);
+router.get("/movies/",getMovies);
+router.post("/movies",moviesValidate,postMovie);
+router.put("/movies/watched/:id",updateWatchedMovie);
+router.delete("/movies/:id",deleteMovie);
 export default router;
