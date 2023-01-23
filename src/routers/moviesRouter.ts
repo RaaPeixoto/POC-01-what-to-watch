@@ -3,10 +3,10 @@ import { deleteMovie, getMovies, postMovie, updateWatchedMovie } from "../contro
 import { moviesValidate } from "../middlewares/moviesValidate.js";
 
 
-const router = Router();
+const moviesRouter = Router();
 
-router.get("/movies/",getMovies);
-router.post("/movies",moviesValidate,postMovie);
-router.put("/movies/watched/:id",updateWatchedMovie);
-router.delete("/movies/:id",deleteMovie);
-export default router;
+moviesRouter.get("/movies/",getMovies);
+moviesRouter.post("/movies",moviesValidate,postMovie);
+moviesRouter.put("/movies/watched/:id",updateWatchedMovie);
+moviesRouter.delete("/movies/:id",deleteMovie);
+export default moviesRouter;
