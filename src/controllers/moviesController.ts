@@ -1,9 +1,17 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-
-import { deleteMovieById, insertMovie, selectMovies, updateIsWatched } from "../repositories/moviesReposity.js";
+import {  deleteMovieById, insertMovie, selectMovies, updateIsWatched } from "../repositories/moviesReposity.js";
 import { isMovieExists, isMovieExistsById } from "../services/moviesServices.js";
 export type Movie = {
+    title: string,
+     image: string,
+     stars: number,
+     description: string,
+    "plataformId": number,
+    "genreId":  number,
+ 
+  }
+ /*  export type Movie = {
     id?:string,
     title: string,
      image: string,
@@ -15,7 +23,7 @@ export type Movie = {
     "createdAt"?: string | number |Date
     plataform? :string,
     genre?:string
-  }
+  } */
 export type QueryMovies = {
     plataform?:string,
     genre?:string
@@ -28,7 +36,7 @@ export async function getMovies(req:Request,res:Response) {
     try{
           const movies = await selectMovies(query);
 
-          res.status(httpStatus.OK).send(movies.rows);
+          res.status(httpStatus.OK).send(movies);
     }catch(err){
         res.sendStatus(httpStatus.NO_CONTENT);
     }
@@ -58,7 +66,7 @@ export async function postMovie(req:Request,res:Response) {
 export async function updateWatchedMovie (req:Request,res:Response){
     const {id}= req.params;
     try{
-        await updateIsWatched(id);
+        await updateIsWatched(parseInt(id));
 
         res.sendStatus(httpStatus.CREATED);
   }catch(err){
@@ -69,12 +77,12 @@ export async function updateWatchedMovie (req:Request,res:Response){
 
 export async function deleteMovie (req:Request,res:Response){
     const {id}= req.params;
-    const isMovieExists = await isMovieExistsById(id);
+    const isMovieExists = await isMovieExistsById(parseInt(id));
     if(!isMovieExists){
         return res.status(httpStatus.BAD_REQUEST).send("This movie not exists");
     }
     try{
-        await deleteMovieById(id)
+        await deleteMovieById(parseInt(id))
 
         res.sendStatus(httpStatus.OK);
   }catch(err){

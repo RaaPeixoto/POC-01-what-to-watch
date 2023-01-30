@@ -13,10 +13,18 @@ Application to manage the movies you want to watch
 npm i
 ```
 
-3. Create a PostgreSQL database use the dump file to cpopulate it
-4. Configure the `.env.development` file using the `.env.example` file 
+3. Create a PostgreSQL database 
+4. Configure the `.env` file using the `.env.example` file 
+5. Run all migrations
+```bash
+npx prisma migrate dev
+```
+6. Seed db
 
-5. Run the back-end in a development environment:
+```bash
+npm run prisma:seed
+```
+7. Run the back-end in a development environment:
 
 ```bash
 npm run dev
@@ -42,8 +50,10 @@ Reponse:
     "description": "movie description",
     "iswatched": false,
     "stars": 4,
-    "genre": "Science fiction",
-    "plataform": "Netflix"
+    "genre": {
+      name: "Science fiction"},
+    "plataform": {
+      name:"Netflix"}
   }
 ]
 ```

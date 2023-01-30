@@ -9,7 +9,7 @@ export async function getGenres(req:Request,res:Response) {
     try{
           const genres = await selectGenres();
 
-          res.status(httpStatus.OK).send(genres.rows);
+          res.status(httpStatus.OK).send(genres);
     }catch(err){
         res.sendStatus(httpStatus.NO_CONTENT);
     }

@@ -1,9 +1,11 @@
-import { QueryResult } from "pg";
-import { Plataforms } from "../controllers/plataformsController.js";
-import connection from "../database/db.js";
+import { plataforms } from "@prisma/client";
+import client from "../database/db.js";
 
-export async function selectPlataforms():Promise<QueryResult<Plataforms>>{
-    return connection.query(
-      `SELECT * FROM plataforms;`);
+export async function selectPlataforms(): Promise<plataforms[]>{
+  return await client.plataforms.findMany()
     
 }
+
+
+
+

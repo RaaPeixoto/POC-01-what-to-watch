@@ -1,9 +1,8 @@
-import { QueryResult } from "pg";
-import { Genres } from "../controllers/genresController.js";
-import connection from "../database/db.js";
+import { genres } from "@prisma/client";
+import client from "../database/db.js";
 
-export async function selectGenres():Promise<QueryResult<Genres[]>>{
-    return connection.query(
-      `SELECT * FROM genres;`);
+
+export async function selectGenres(): Promise<genres[]>{
+  return await client.genres.findMany()
     
 }

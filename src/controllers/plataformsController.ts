@@ -7,7 +7,7 @@ export async function getPlataforms(req:Request,res:Response) {
     try{
           const plataforms = await selectPlataforms();
 
-          res.status(httpStatus.OK).send(plataforms.rows);
+          res.status(httpStatus.OK).send(plataforms);
     }catch(err){
         res.sendStatus(httpStatus.NO_CONTENT);
     }
